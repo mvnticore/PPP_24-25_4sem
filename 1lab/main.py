@@ -1,3 +1,4 @@
+aerbhrgbujdzrbjkzdf = 11
 
 def main():
     # Ваш код здесь
