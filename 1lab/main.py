@@ -1,7 +1,7 @@
 aerbhrgbujdzrbjkzdf = 11
 
 def main():
-    # Ваш код здесь
+    print('rein')
     pass
 
 if __name__ == "__main__":
