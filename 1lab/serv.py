@@ -19,11 +19,6 @@ def get_directory_structure(root_dir):
 
 
 async def handle_client(reader, writer):
-    """
-    Поддерживаются команды:
-    - SET_ROOT: <путь> – смена корневой директории.
-    - GET_STRUCTURE – получение файла с информацией о структуре директории.
-    """
     global current_root
     addr = writer.get_extra_info('peername')
     print(f"Подключен клиент: {addr}")
