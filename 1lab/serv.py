@@ -20,7 +20,6 @@ def get_directory_structure(root_dir):
 
 async def handle_client(reader, writer):
     """
-    Асинхронная функция для обработки запросов от клиента.
     Поддерживаются команды:
     - SET_ROOT: <путь> – смена корневой директории.
     - GET_STRUCTURE – получение файла с информацией о структуре директории.
