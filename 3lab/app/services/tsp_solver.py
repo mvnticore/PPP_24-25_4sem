@@ -4,20 +4,16 @@ import math
 
 
 def solve_tsp(points):
-    """Упрощенный решатель задачи коммивояжера"""
     n = len(points)
 
-    # Для 0-3 точек возвращаем тривиальное решение
     if n <= 1:
         return [0], 0.0
     if n == 2:
         return [0, 1, 0], distance(points[0], points[1]) * 2
 
-    # Для 4+ точек используем полный перебор
     min_path = None
     min_distance = float('inf')
 
-    # Имитация длительного вычисления
     total_permutations = math.factorial(n - 1)
     processed = 0
 
@@ -31,7 +27,7 @@ def solve_tsp(points):
 
         processed += 1
         progress = int(processed / total_permutations * 100)
-        if progress % 10 == 0:  # Отправляем прогресс каждые 10%
+        if progress % 10 == 0:
             yield progress, None, None
 
     yield 100, min_path, min_distance
