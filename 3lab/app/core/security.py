@@ -30,17 +30,14 @@ class TokenData(BaseModel):
 
 
 def verify_password(plain_password: str, hashed_password: str):
-    """Проверка пароля"""
     return pwd_context.verify(plain_password, hashed_password)
 
 
 def get_password_hash(password: str):
-    """Хеширование пароля"""
     return pwd_context.hash(password)
 
 
 def authenticate_user(db: Session, username: str, password: str):
-    """Аутентификация пользователя"""
     user = get_user_by_username(db, username)
     if not user:
         return False
@@ -50,7 +47,6 @@ def authenticate_user(db: Session, username: str, password: str):
 
 
 def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):
-    """Создание JWT токена"""
     to_encode = data.copy()
     if expires_delta:
         expire = datetime.utcnow() + expires_delta
@@ -62,7 +58,6 @@ def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):
 
 
 async def get_current_user(token: str = Depends(oauth2_scheme), db: Session = Depends(get_db)):
-    """Получение текущего пользователя по токену"""
     credentials_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
         detail="Could not validate credentials",
@@ -85,7 +80,6 @@ async def get_current_user(token: str = Depends(oauth2_scheme), db: Session = De
 
 @router.post("/register", response_model=Token)
 async def register(user_data: UserCreate, db: Session = Depends(get_db)):
-    """Регистрация нового пользователя"""
     db_user = get_user_by_username(db, username=user_data.username)
     if db_user:
         raise HTTPException(status_code=400, detail="Username already registered")
@@ -104,7 +98,6 @@ async def login_for_access_token(
         form_data: OAuth2PasswordRequestForm = Depends(),
         db: Session = Depends(get_db)
 ):
-    """Получение токена для аутентификации"""
     user = authenticate_user(db, form_data.username, form_data.password)
     if not user:
         raise HTTPException(
