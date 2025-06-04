@@ -16,7 +16,6 @@ app = Celery(
 def solve_tsp_task(task_id: str, user_id: str, points: list):
     db = SessionLocal()
 
-    # Отправляем уведомление о начале
     ws_manager.push_notification(user_id, {
         "status": "STARTED",
         "task_id": task_id,
