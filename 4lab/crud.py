@@ -41,7 +41,7 @@ def get_books(db: Session, author_id: int = None):
 
 def create_book(db: Session, book: schemas.BookCreate):
     if not get_author(db, book.author_id):
-        return None  # Автор не найден
+        return None
 
     db_book = models.Book(
         title=book.title,
